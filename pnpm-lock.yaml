@@ -1,0 +1,32 @@
+lockfileVersion: '6.1'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+dependencies:
+  dompurify:
+    specifier: ^3.0.5
+    version: 3.0.5
+  html-to-md:
+    specifier: ^0.8.3
+    version: 0.8.3
+  marked:
+    specifier: ^5.1.1
+    version: 5.1.1
+
+packages:
+
+  /dompurify@3.0.5:
+    resolution: {integrity: sha512-F9e6wPGtY+8KNMRAVfxeCOHU0/NPWMSENNq4pQctuXRqqdEPW7q3CrLbR5Nse044WwacyjHGOMlvNsBe1y6z9A==}
+    dev: false
+
+  /html-to-md@0.8.3:
+    resolution: {integrity: sha512-Va+bB1YOdD6vMRDue9/l7YxbERgwOgsos4erUDRfRN6YE0B2Wbbw8uAj6xZJk9A9vrjVy7mG/WLlhDw6RXfgsA==}
+    dev: false
+
+  /marked@5.1.1:
+    resolution: {integrity: sha512-bTmmGdEINWmOMDjnPWDxGPQ4qkDLeYorpYbEtFOXzOruTwUE671q4Guiuchn4N8h/v6NGd7916kXsm3Iz4iUSg==}
+    engines: {node: '>= 18'}
+    hasBin: true
+    dev: false

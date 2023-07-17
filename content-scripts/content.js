@@ -1,4 +1,5 @@
-let res = "";
+let mdres = "";
+let labelres = "";
 const selectCallback = debounce(function () {
   var selection = window.getSelection();
   var selectedText = selection.toString();
@@ -7,11 +8,14 @@ const selectCallback = debounce(function () {
   newNode.innerHTML = selectedText;
   if (selectedText) {
     selection.anchorNode.parentElement.style.borderBottom = "5px solid skyblue";
-    console.log("selectedText", selectedText);
+    const label = DOMPurify.sanitize(newNode);
     document
-      .querySelector("#previewMD")
-      .insertAdjacentHTML("beforeend", DOMPurify.sanitize(newNode));
-    res += html2md(DOMPurify.sanitize(newNode), { skipTags: ["div"] }) + "\n";
+      .querySelector("#previewMDContent")
+      .insertAdjacentHTML("beforeend", label);
+    labelres += label;
+    mdres += html2md(label, { skipTags: ["div"] }) + "\n\n";
+    localStorage.setItem("mdres", mdres);
+    localStorage.setItem("labelres", labelres);
   }
 }, 1000);
 
@@ -28,10 +32,18 @@ function debounce(fn, wait) {
 function createView() {
   document.body.insertAdjacentHTML(
     "afterbegin",
-    `<div id="previewMD"><div id="copyMd">复制</div></div>`
+    `<div id="previewMD"><div id="delMd">❌</div><div id="copyMd">📑</div>
+    <main id="previewMDContent">${
+      localStorage.getItem("labelres") || ""
+    }</main></div>`
   );
 }
 createView();
 document.querySelector("#copyMd").addEventListener("click", function () {
-  navigator.clipboard.writeText(res);
+  navigator.clipboard.writeText(mdres);
+});
+document.querySelector("#delMd").addEventListener("click", function () {
+  document.querySelector("#previewMDContent").innerHTML = "";
+  localStorage.removeItem("mdres");
+  localStorage.removeItem("labelres");
 });
